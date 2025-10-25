@@ -80,7 +80,7 @@ def main():
         print("Triggering camera permission prompt...")
         subprocess.run([venv_python, "-c", 
                        "import cv2; cap=cv2.VideoCapture(0); cap.read(); cap.release()"])
-        input("\nIf you saw a camera permission popup, please click 'OK' and press Enter to continue, else just press Enter...\n")
+        input("\nIf you saw a camera permission popup, please click 'Allow' and press Enter to continue, else just press Enter...\n")
     
     print("Starting the Hand Drawing application...\n")
     print("Instructions:")
