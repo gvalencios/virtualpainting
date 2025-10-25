@@ -13,14 +13,14 @@ echo
 echo "Running from: $(pwd)"
 echo
 
-# Check if Python is installed
-if ! command -v python3 &> /dev/null; then
-    echo "ERROR: Python 3 is not installed!"
+# Check if Python 3.9 is installed
+if ! command -v python3.9 &> /dev/null; then
+    echo "ERROR: Python 3.9 is not installed!"
     echo
-    echo "Please download and install Python from:"
+    echo "Please download and install Python 3.9.x from:"
     echo "https://www.python.org/downloads/"
     echo "OR"
-    echo "Install using Homebrew: brew install python"
+    echo "Install using Homebrew: brew install python@3.9"
     echo
     read -p "Press Enter to exit..."
     exit 1
@@ -30,6 +30,25 @@ fi
 PYTHON_VERSION=$(python3 --version)
 echo "✓ $PYTHON_VERSION detected"
 echo
+
+# Create virtual environment if it doesn't exist
+if [ ! -d "venv" ]; then
+    echo "Creating virtual environment with Python 3.9..."
+    python3.9 -m venv venv
+    if [ $? -ne 0 ]; then
+        echo "ERROR: Could not create virtual environment"
+        read -p "Press Enter to exit..."
+        exit 1
+    fi
+    echo "✓ Virtual environment created successfully!"
+    echo
+else
+    echo "✓ Virtual environment already exists"
+    echo
+fi
+
+# Activate virtual environment
+source venv/bin/activate
 
 # Check if pip is installed
 if ! command -v pip3 &> /dev/null; then
